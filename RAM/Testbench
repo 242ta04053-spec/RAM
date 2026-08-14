@@ -1,0 +1,102 @@
+`timescale 1ns/1ps
+
+module ram_tb;
+
+    reg        clk;
+    reg        we;
+    reg [2:0]  address;
+    reg [7:0]  data_in;
+    wire [7:0] data_out;
+
+    // Instantiate RAM
+    ram uut (
+        .clk(clk),
+        .we(we),
+        .address(address),
+        .data_in(data_in),
+        .data_out(data_out)
+    );
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    initial begin
+
+        // Generate waveform
+        $dumpfile("ram.vcd");
+        $dumpvars(0, ram_tb);
+
+        // Initialize signals
+        clk     = 0;
+        we      = 0;
+        address = 0;
+        data_in = 0;
+
+        // -------------------------
+        // WRITE OPERATIONS
+        // -------------------------
+
+        // Write AA to address 0
+        #10;
+        we = 1;
+        address = 3'b000;
+        data_in = 8'hAA;
+
+        // Write 55 to address 1
+        #10;
+        address = 3'b001;
+        data_in = 8'h55;
+
+        // Write F0 to address 2
+        #10;
+        address = 3'b010;
+        data_in = 8'hF0;
+
+        // Write 0F to address 3
+        #10;
+        address = 3'b011;
+        data_in = 8'h0F;
+
+        // Write A5 to address 4
+        #10;
+        address = 3'b100;
+        data_in = 8'hA5;
+
+        // Stop writing
+        #10;
+        we = 0;
+
+        // -------------------------
+        // READ OPERATIONS
+        // -------------------------
+
+        // Read address 0
+        address = 3'b000;
+        #10;
+
+        // Read address 1
+        address = 3'b001;
+        #10;
+
+        // Read address 2
+        address = 3'b010;
+        #10;
+
+        // Read address 3
+        address = 3'b011;
+        #10;
+
+        // Read address 4
+        address = 3'b100;
+        #10;
+
+        $finish;
+    end
+
+    // Display simulation results
+    initial begin
+        $monitor("Time=%0t | WE=%b | Address=%b | Data_In=%h | Data_Out=%h",
+                 $time, we, address, data_in, data_out);
+    end
+
+endmodule

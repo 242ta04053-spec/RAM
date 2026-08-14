@@ -1,0 +1,11 @@
+Time=0   | WE=0 | Address=000 | Data_In=00 | Data_Out=xx
+Time=10  | WE=1 | Address=000 | Data_In=AA | Data_Out=xx
+Time=20  | WE=1 | Address=001 | Data_In=55 | Data_Out=55
+Time=30  | WE=1 | Address=010 | Data_In=F0 | Data_Out=F0
+Time=40  | WE=1 | Address=011 | Data_In=0F | Data_Out=0F
+Time=50  | WE=1 | Address=100 | Data_In=A5 | Data_Out=A5
+Time=60  | WE=0 | Address=000 | Data_In=A5 | Data_Out=AA
+Time=70  | WE=0 | Address=001 | Data_In=A5 | Data_Out=55
+Time=80  | WE=0 | Address=010 | Data_In=A5 | Data_Out=F0
+Time=90  | WE=0 | Address=011 | Data_In=A5 | Data_Out=0F
+Time=100 | WE=0 | Address=100 | Data_In=A5 | Data_Out=A5
